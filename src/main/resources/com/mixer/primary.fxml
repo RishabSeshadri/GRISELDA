@@ -3,23 +3,49 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="penith" alignment="CENTER" onKeyPressed="#initialize" prefHeight="805.0" prefWidth="1539.0" spacing="20.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mixer.PrimaryController">
+<VBox fx:id="bgd" alignment="CENTER" onKeyPressed="#backgroundKeyDetected" prefHeight="805.0" prefWidth="2400.0" spacing="20.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mixer.PrimaryController">
    <children>
-      <HBox alignment="CENTER" prefWidth="1287.0">
+      <ButtonBar maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="432.0" translateX="-501.0" translateY="92.0">
+        <buttons>
+            <Button fx:id="enterW" mnemonicParsing="false" onMouseClicked="#onEnterClickedW" text="Enter" />
+            <TextField fx:id="inputFilenameW" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="41.0" prefWidth="205.0" />
+        </buttons>
+      </ButtonBar>
+      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="111.0" prefWidth="505.0">
          <children>
-            <Button fx:id="audio1" mnemonicParsing="false" onKeyPressed="#initialize" onMouseClicked="#printOutAudio1" prefHeight="111.0" prefWidth="252.0" text="W" />
-            <Button fx:id="audio2" mnemonicParsing="false" onKeyPressed="#initialize" onMouseClicked="#printOutAudio2" prefHeight="111.0" prefWidth="252.0" text="A" />
+            <Button fx:id="audio1" mnemonicParsing="false" onKeyPressed="#backgroundKeyDetected" onMouseClicked="#printOutAudio1" prefHeight="111.0" prefWidth="252.0" text="W" />
+            <Button fx:id="audio2" mnemonicParsing="false" onKeyPressed="#backgroundKeyDetected" onMouseClicked="#printOutAudio2" prefHeight="111.0" prefWidth="252.0" text="A" />
          </children>
       </HBox>
-      <HBox alignment="CENTER">
+      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity">
          <children>
-            <Button fx:id="audio3" mnemonicParsing="false" onKeyPressed="#initialize" onMouseClicked="#printOutAudio3" prefHeight="111.0" prefWidth="252.0" text="S" />
-            <Button fx:id="audio4" mnemonicParsing="false" onKeyPressed="#initialize" onMouseClicked="#printOutAudio4" prefHeight="111.0" prefWidth="252.0" text="D" />
+            <Button fx:id="audio3" mnemonicParsing="false" onKeyPressed="#backgroundKeyDetected" onMouseClicked="#printOutAudio3" prefHeight="111.0" prefWidth="252.0" text="S" />
+            <Button fx:id="audio4" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onKeyPressed="#backgroundKeyDetected" onMouseClicked="#printOutAudio4" prefHeight="111.0" prefWidth="252.0" text="D" />
          </children>
       </HBox>
+      <ButtonBar maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="432.0" translateX="483.0" translateY="-224.0">
+         <buttons>
+            <TextField fx:id="inputFilenameA" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="41.0" prefWidth="205.0" />
+            <Button fx:id="enterA" mnemonicParsing="false" onMouseClicked="#onEnterClickedA" text="Enter" />
+         </buttons>
+      </ButtonBar>
+      <ButtonBar maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="432.0" translateX="-501.0" translateY="-157.0">
+         <buttons>
+            <Button fx:id="enterS" mnemonicParsing="false" onMouseClicked="#onEnterClickedS" text="Enter" />
+            <TextField fx:id="inputFilenameS" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="41.0" prefWidth="205.0" />
+         </buttons>
+      </ButtonBar>
+      <ButtonBar maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="432.0" translateX="483.0" translateY="-217.0">
+         <buttons>
+            <TextField fx:id="inputFilenameD" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="41.0" prefWidth="205.0" />
+            <Button fx:id="enterD" mnemonicParsing="false" onMouseClicked="#onEnterClickedD" text="Enter" />
+         </buttons>
+      </ButtonBar>
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

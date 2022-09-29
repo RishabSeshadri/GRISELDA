@@ -1,14 +1,18 @@
 package com.mixer;
 
-import javax.sound.Sampled.*;
-import java.io.*;
+import javax.sound.sampled.*;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
+
+import java.io.*;
 public class SoundManipulator {
-    // record duration, in milliseconds
-    static final long RECORD_TIME = 60000; // 1 minute
+
+    @FXML
+    TextField inputFilename;
 
     // path of the wav file
-    File wavFile = new File("C:/Users/risha/Desktop/Other/Programming/GRISELDA/griselda/saves/RecordAudio.wav");
+    File wavFile = new File("C:/Users/risha/Desktop/Other/Programming/GRISELDA/griselda/saves/balls.wav");
 
     // format of audio file
     AudioFileFormat.Type fileType = AudioFileFormat.Type.WAVE;
@@ -16,7 +20,7 @@ public class SoundManipulator {
     // the line from which audio data is captured
     TargetDataLine line;
 
-        /**
+    /**
          * Defines an audio format
          */
     AudioFormat getAudioFormat() {
@@ -29,10 +33,10 @@ public class SoundManipulator {
         channels, signed, bigEndian);
         return format;
         }
-    /**
+/**
      * Captures the sound and record into a WAV file
      */
-    void start() {
+    void start(File wvFile) {
         try {
             AudioFormat format = getAudioFormat();
             DataLine.Info info = new DataLine.Info(TargetDataLine.class, format);
@@ -53,7 +57,7 @@ public class SoundManipulator {
             System.out.println("Start recording...");
 
             // start recording
-            AudioSystem.write(ais, fileType, wavFile);
+            AudioSystem.write(ais, fileType, wvFile);
 
         } catch (LineUnavailableException ex) {
             ex.printStackTrace();
@@ -62,7 +66,7 @@ public class SoundManipulator {
         }
     }
 
-    /**
+/**
      * Closes the target data line to finish capturing and recording
      */
     void finish() {
@@ -71,28 +75,7 @@ public class SoundManipulator {
         System.out.println("Finished");
     }
 
-    /**
+/**
      * Entry to run the program
      */
-    public static void main(String[] args) {
-        final SoundManipulator recorder = new SoundManipulator();
-
-        // creates a new thread that waits for a specified
-        // of time before stopping
-        Thread stopper = new Thread(new Runnable() {
-            public void run() {
-                try {
-                    Thread.sleep(RECORD_TIME);
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
-                recorder.finish();
-            }
-        });
-
-        stopper.start();
-
-        // start recording
-        recorder.start();
-    }
 }
