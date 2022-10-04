@@ -1,7 +1,12 @@
 package com.mixer;
 
+
 import java.io.File;
 import java.io.IOException;
+
+import javafx.scene.media.*;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -9,67 +14,158 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 
 public class PrimaryController {
-    
-    //ADD DISPLAY THE FILE THAT IS OPENED ON THE BUTTON NAME
-    //ADD ALLOW SELECTION OF TIME
 
     @FXML
     Button audio1, audio2, audio3, audio4;
+
     @FXML
     VBox bgd;
 
     @FXML
     TextField inputFilenameW, inputFilenameA, inputFilenameS, inputFilenameD;
+    
+    //ADD DISPLAY THE FILE THAT IS OPENED ON THE BUTTON NAME
+    //ADD ALLOW SELECTION OF TIME
+    //ADD TIMER COUNTDOWN
+    //FIGURE OUT AUDIO OUTPUT
 
+    // Move the code that was here, to play the file, inside the if statement so the
+    // application doesn't crash if the user doesn't select a file to play.
+
+    FileChooser fileChooser = new FileChooser();
+
+    public PrimaryController() {
+        fileChooser.setTitle("Open Resource File");
+        fileChooser.getExtensionFilters().addAll(
+                new ExtensionFilter("Audio Files", "*.wav", "*.mp3", "*.aac"),
+                new ExtensionFilter("All Files", "*.*"));
+    }
+    
     @FXML
     public void backgroundKeyDetected(){
         bgd.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.W) {
                 System.out.println(audio1.getId());
+                File gottenFile = new File("C:/Users/risha/Desktop/Other/Programming/GRISELDA/griselda/saves/" + audio1.getText() + ".wav");
+
+                if(!gottenFile.exists()){
+                    System.out.println("FILE DNI FOR W KEY! CREATE FILE FIRST L");
+                    return;
+                }
+
+                MediaPlayer mediaPlayer = new MediaPlayer(new Media(gottenFile.toURI().toString()));
+                mediaPlayer.play();
             } else if (event.getCode() == KeyCode.A) {
                 System.out.println(audio2.getId());
+                File gottenFile = new File("C:/Users/risha/Desktop/Other/Programming/GRISELDA/griselda/saves/" + audio2.getText() + ".wav");
+
+                if(!gottenFile.exists()){
+                    System.out.println("FILE DNI FOR A KEY! CREATE FILE FIRST L");
+                    return;
+                }
+
+                MediaPlayer mediaPlayer = new MediaPlayer(new Media(gottenFile.toURI().toString()));
+                mediaPlayer.play();
             } else if (event.getCode() == KeyCode.S) {
                 System.out.println(audio3.getId());
+                File gottenFile = new File("C:/Users/risha/Desktop/Other/Programming/GRISELDA/griselda/saves/" + audio3.getText() + ".wav");
+
+                if(!gottenFile.exists()){
+                    System.out.println("FILE DNI FOR S KEY! CREATE FILE FIRST L");
+                    return;
+                }
+
+                MediaPlayer mediaPlayer = new MediaPlayer(new Media(gottenFile.toURI().toString()));
+                mediaPlayer.play();
             } else if (event.getCode() == KeyCode.D) {
                 System.out.println(audio4.getId());
+                File gottenFile = new File("C:/Users/risha/Desktop/Other/Programming/GRISELDA/griselda/saves/" + audio4.getText() + ".wav");
+
+                if(!gottenFile.exists()){
+                    System.out.println("FILE DNI FOR D KEY! CREATE FILE FIRST L");
+                    return;
+                }
+
+                MediaPlayer mediaPlayer = new MediaPlayer(new Media(gottenFile.toURI().toString()));
+                mediaPlayer.play();
             }
         });
     }
     @FXML
     private void printOutAudio1() throws IOException{
         System.out.println(audio1.getId());
+        File gottenFile = new File("C:/Users/risha/Desktop/Other/Programming/GRISELDA/griselda/saves/" + audio1.getText() + ".wav");
+
+        if(!gottenFile.exists()){
+            System.out.println("FILE DNI FOR W KEY! CREATE FILE FIRST L");
+            return;
+        }
+
+        MediaPlayer mediaPlayer = new MediaPlayer(new Media(gottenFile.toURI().toString()));
+        mediaPlayer.play();
     }
 
     @FXML
     private void printOutAudio2() throws IOException{
         System.out.println(audio2.getId());
+        File gottenFile = new File("C:/Users/risha/Desktop/Other/Programming/GRISELDA/griselda/saves/" + audio2.getText() + ".wav");
+
+        if(!gottenFile.exists()){
+            System.out.println("FILE DNI FOR A KEY! CREATE FILE FIRST L");
+            return;
+        }
+
+        MediaPlayer mediaPlayer = new MediaPlayer(new Media(gottenFile.toURI().toString()));
+        mediaPlayer.play();
     }
 
     @FXML
     private void printOutAudio3() throws IOException{
         System.out.println(audio3.getId());
+        File gottenFile = new File("C:/Users/risha/Desktop/Other/Programming/GRISELDA/griselda/saves/" + audio3.getText() + ".wav");
+
+        if(!gottenFile.exists()){
+            System.out.println("FILE DNI FOR D KEY! CREATE FILE FIRST L");
+            return;
+        }
+
+        MediaPlayer mediaPlayer = new MediaPlayer(new Media(gottenFile.toURI().toString()));
+        mediaPlayer.play();
     }
 
     @FXML
     private void printOutAudio4() throws IOException{
         System.out.println(audio4.getId());
+        File gottenFile = new File("C:/Users/risha/Desktop/Other/Programming/GRISELDA/griselda/saves/" + audio4.getText() + ".wav");
+
+        if(!gottenFile.exists()){
+            System.out.println("FILE DNI FOR Dx KEY! CREATE FILE FIRST L");
+            return;
+        }
+
+        MediaPlayer mediaPlayer = new MediaPlayer(new Media(gottenFile.toURI().toString()));
+        mediaPlayer.play();
     }
     @FXML
     private void onEnterClickedW(){
         onEnterClicked(1);
+        audio1.setText(inputFilenameW.getText());
     }
 
     @FXML
     private void onEnterClickedA(){
         onEnterClicked(2);
+        audio2.setText(inputFilenameA.getText());
     }
     @FXML
     private void onEnterClickedS(){
         onEnterClicked(3);
+        audio3.setText(inputFilenameS.getText());
     }
     @FXML
     private void onEnterClickedD(){
         onEnterClicked(4);
+        audio4.setText(inputFilenameD.getText());
     }
 
     @FXML

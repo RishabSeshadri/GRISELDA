@@ -8,6 +8,8 @@ import javafx.scene.control.TextField;
 import java.io.*;
 public class SoundManipulator {
 
+    boolean isFinished = false;
+
     @FXML
     TextField inputFilename;
 
@@ -37,6 +39,7 @@ public class SoundManipulator {
      * Captures the sound and record into a WAV file
      */
     void start(File wvFile) {
+        isFinished = false;
         try {
             AudioFormat format = getAudioFormat();
             DataLine.Info info = new DataLine.Info(TargetDataLine.class, format);
@@ -73,6 +76,11 @@ public class SoundManipulator {
         line.stop();
         line.close();
         System.out.println("Finished");
+        isFinished = true;
+    }
+
+    public boolean getIsFinished(){
+        return isFinished;
     }
 
 /**
