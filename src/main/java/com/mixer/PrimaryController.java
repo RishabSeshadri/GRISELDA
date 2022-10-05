@@ -17,6 +17,7 @@ public class PrimaryController {
 
     @FXML
     Button audio1, audio2, audio3, audio4;
+    public static ButtonHelper audio1H = new ButtonHelper("audio1"), audio2H = new ButtonHelper("audio2"), audio3H = new ButtonHelper("audio3"), audio4H = new ButtonHelper("audio4");
 
     @FXML
     VBox bgd;
@@ -28,6 +29,7 @@ public class PrimaryController {
     //ADD ALLOW SELECTION OF TIME
     //ADD TIMER COUNTDOWN
     //FIGURE OUT AUDIO OUTPUT
+    //RESEARCH STATE MACHINES AND THREADS TO FIND OUT HOW TO PLAY ONE AUDIO AT TIME
 
     // Move the code that was here, to play the file, inside the if statement so the
     // application doesn't crash if the user doesn't select a file to play.
@@ -102,7 +104,22 @@ public class PrimaryController {
         }
 
         MediaPlayer mediaPlayer = new MediaPlayer(new Media(gottenFile.toURI().toString()));
-        mediaPlayer.play();
+        mediaPlayer.setOnPlaying(new RunnableOnPlaying(audio1H));
+        mediaPlayer.setOnEndOfMedia(new RunnableOnPaused(audio1H));
+        mediaPlayer.setOnStopped(new RunnableOnPaused(audio1H));
+        mediaPlayer.setOnError(new RunnableOnPaused(audio1H));
+        mediaPlayer.setOnHalted(new RunnableOnPaused(audio1H));
+        mediaPlayer.setOnPaused(new RunnableOnPaused(audio1H));
+        mediaPlayer.setOnStalled(new RunnableOnPaused(audio1H));
+
+        if(audio1H.getStatus() == ButtonHelper.ButtonStatus.PAUSED){
+            mediaPlayer.play();
+            System.out.println("was paused just played");
+        } else {
+            System.out.println("wasnt paused but just played anyways");
+            mediaPlayer.stop();
+            mediaPlayer.play();
+        }
     }
 
     @FXML
