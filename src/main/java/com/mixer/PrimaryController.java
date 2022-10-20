@@ -1,6 +1,5 @@
 package com.mixer;
 
-
 import java.io.File;
 import java.io.IOException;
 
@@ -24,6 +23,11 @@ public class PrimaryController {
 
     @FXML
     TextField inputFilenameW, inputFilenameA, inputFilenameS, inputFilenameD;
+
+    boolean oneTime = true;
+
+    
+    GriseldaMediaPlayer mediaPlayer = new GriseldaMediaPlayer();
     
     //ADD DISPLAY THE FILE THAT IS OPENED ON THE BUTTON NAME
     //ADD ALLOW SELECTION OF TIME
@@ -90,11 +94,14 @@ public class PrimaryController {
 
                 MediaPlayer mediaPlayer = new MediaPlayer(new Media(gottenFile.toURI().toString()));
                 mediaPlayer.play();
+            } else if (event.getCode() == KeyCode.M){
+                System.out.println(mediaPlayer.toString());
             }
         });
     }
     @FXML
     private void printOutAudio1() throws IOException{
+
         System.out.println(audio1.getId());
         File gottenFile = new File("C:/Users/risha/Desktop/Other/Programming/GRISELDA/griselda/saves/" + audio1.getText() + ".wav");
 
@@ -102,24 +109,19 @@ public class PrimaryController {
             System.out.println("FILE DNI FOR W KEY! CREATE FILE FIRST L");
             return;
         }
-
-        MediaPlayer mediaPlayer = new MediaPlayer(new Media(gottenFile.toURI().toString()));
-        mediaPlayer.setOnPlaying(new RunnableOnPlaying(audio1H));
-        mediaPlayer.setOnEndOfMedia(new RunnableOnPaused(audio1H));
-        mediaPlayer.setOnStopped(new RunnableOnPaused(audio1H));
-        mediaPlayer.setOnError(new RunnableOnPaused(audio1H));
-        mediaPlayer.setOnHalted(new RunnableOnPaused(audio1H));
-        mediaPlayer.setOnPaused(new RunnableOnPaused(audio1H));
-        mediaPlayer.setOnStalled(new RunnableOnPaused(audio1H));
-
-        if(audio1H.getStatus() == ButtonHelper.ButtonStatus.PAUSED){
+        if(oneTime){
+            mediaPlayer.setMediaPlayer(new MediaPlayer(new Media(gottenFile.toURI().toString())));
             mediaPlayer.play();
-            System.out.println("was paused just played");
-        } else {
-            System.out.println("wasnt paused but just played anyways");
+        } else if(mediaPlayer.getStatus() == GriseldaMediaPlayer.PlayerStatus.PLAYING){
+            System.out.println("WAS PLAYING. PAUSING.");
             mediaPlayer.stop();
+            mediaPlayer.setMediaPlayer(new MediaPlayer(new Media(gottenFile.toURI().toString())));
+            mediaPlayer.play();
+        } else {
+            mediaPlayer.setMediaPlayer(new MediaPlayer(new Media(gottenFile.toURI().toString())));
             mediaPlayer.play();
         }
+        oneTime = false;
     }
 
     @FXML
@@ -207,7 +209,7 @@ public class PrimaryController {
         }
 
 
-        long recordTime = 15000;
+        long recordTime = 5000;
         File wavFile = new File("C:/Users/risha/Desktop/Other/Programming/GRISELDA/griselda/saves/" + inputFilename.getText() + ".wav");
 
         final SoundManipulator recorder = new SoundManipulator();
