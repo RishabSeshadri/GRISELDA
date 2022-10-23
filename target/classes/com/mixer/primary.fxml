@@ -7,43 +7,55 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<VBox fx:id="bgd" alignment="CENTER" onKeyPressed="#backgroundKeyDetected" prefHeight="805.0" prefWidth="2400.0" spacing="20.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mixer.PrimaryController">
+<VBox fx:id="bgd" alignment="CENTER" minHeight="610.0" minWidth="1400.0" onKeyPressed="#backgroundKeyDetected" prefHeight="805.0" prefWidth="2400.0" spacing="20.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mixer.PrimaryController">
    <children>
+      <Text fx:id="timerCounter" strokeType="OUTSIDE" strokeWidth="0.0" text="TIME" wrappingWidth="187.203186750412" />
+      <ButtonBar maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="432.0">
+         <buttons>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Recording Time (seconds)" wrappingWidth="187.203186750412" />
+            <TextField fx:id="inputRecTime" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="41.0" prefWidth="205.0" />
+         </buttons>
+      </ButtonBar>
       <ButtonBar maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="432.0" translateX="-501.0" translateY="92.0">
         <buttons>
-            <Button fx:id="enterW" mnemonicParsing="false" onMouseClicked="#onEnterClickedW" text="Enter" />
+            <Button fx:id="fileChooserWBtn" mnemonicParsing="false" onMouseClicked="#onFileChooserClickedW" text="Upload File" />
             <TextField fx:id="inputFilenameW" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="41.0" prefWidth="205.0" />
+            <Button fx:id="enterW" mnemonicParsing="false" onMouseClicked="#onEnterClickedW" text="Enter" />
         </buttons>
       </ButtonBar>
       <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="111.0" prefWidth="505.0">
          <children>
-            <Button fx:id="audio1" mnemonicParsing="false" onKeyPressed="#backgroundKeyDetected" onMouseClicked="#printOutAudio1" prefHeight="111.0" prefWidth="252.0" text="W" />
-            <Button fx:id="audio2" mnemonicParsing="false" onKeyPressed="#backgroundKeyDetected" onMouseClicked="#printOutAudio2" prefHeight="111.0" prefWidth="252.0" text="A" />
+            <Button fx:id="audio1" mnemonicParsing="false" onKeyPressed="#backgroundKeyDetected" onMouseClicked="#playAudioWFXML" prefHeight="111.0" prefWidth="252.0" text="W" />
+            <Button fx:id="audio2" mnemonicParsing="false" onKeyPressed="#backgroundKeyDetected" onMouseClicked="#playAudioAFXML" prefHeight="111.0" prefWidth="252.0" text="A" />
          </children>
       </HBox>
       <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity">
          <children>
-            <Button fx:id="audio3" mnemonicParsing="false" onKeyPressed="#backgroundKeyDetected" onMouseClicked="#printOutAudio3" prefHeight="111.0" prefWidth="252.0" text="S" />
-            <Button fx:id="audio4" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onKeyPressed="#backgroundKeyDetected" onMouseClicked="#printOutAudio4" prefHeight="111.0" prefWidth="252.0" text="D" />
+            <Button fx:id="audio3" mnemonicParsing="false" onKeyPressed="#backgroundKeyDetected" onMouseClicked="#playAudioSFXML" prefHeight="111.0" prefWidth="252.0" text="S" />
+            <Button fx:id="audio4" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onKeyPressed="#backgroundKeyDetected" onMouseClicked="#playAudioDFXML" prefHeight="111.0" prefWidth="252.0" text="D" />
          </children>
       </HBox>
       <ButtonBar maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="432.0" translateX="483.0" translateY="-224.0">
          <buttons>
-            <TextField fx:id="inputFilenameA" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="41.0" prefWidth="205.0" />
             <Button fx:id="enterA" mnemonicParsing="false" onMouseClicked="#onEnterClickedA" text="Enter" />
+            <TextField fx:id="inputFilenameA" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="41.0" prefWidth="205.0" />
+            <Button fx:id="fileChooserABtn" mnemonicParsing="false" onMouseClicked="#onFileChooserClickedA" text="Upload File" />
          </buttons>
       </ButtonBar>
       <ButtonBar maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="432.0" translateX="-501.0" translateY="-157.0">
          <buttons>
-            <Button fx:id="enterS" mnemonicParsing="false" onMouseClicked="#onEnterClickedS" text="Enter" />
+            <Button fx:id="fileChooserSBtn" mnemonicParsing="false" onMouseClicked="#onFileChooserClickedS" text="Upload File" />
             <TextField fx:id="inputFilenameS" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="41.0" prefWidth="205.0" />
+            <Button fx:id="enterS" mnemonicParsing="false" onMouseClicked="#onEnterClickedS" text="Enter" />
          </buttons>
       </ButtonBar>
       <ButtonBar maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="40.0" prefWidth="432.0" translateX="483.0" translateY="-217.0">
          <buttons>
-            <TextField fx:id="inputFilenameD" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="41.0" prefWidth="205.0" />
             <Button fx:id="enterD" mnemonicParsing="false" onMouseClicked="#onEnterClickedD" text="Enter" />
+            <TextField fx:id="inputFilenameD" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="41.0" prefWidth="205.0" />
+            <Button fx:id="fileChooserDBtn" mnemonicParsing="false" onMouseClicked="#onFileChooserClickedD" text="Upload File" />
          </buttons>
       </ButtonBar>
    </children>

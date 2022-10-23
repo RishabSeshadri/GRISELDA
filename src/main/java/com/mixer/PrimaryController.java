@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javafx.scene.media.*;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.fxml.FXML;
@@ -12,179 +13,67 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 
+import java.awt.MouseInfo;
 public class PrimaryController {
 
     @FXML
-    Button audio1, audio2, audio3, audio4;
+    Button audio1, audio2, audio3, audio4, timerBtn, fileChooserWBtn, fileChooserABtn, fileChooserSBtn, fileChooserDBtn;
     public static ButtonHelper audio1H = new ButtonHelper("audio1"), audio2H = new ButtonHelper("audio2"), audio3H = new ButtonHelper("audio3"), audio4H = new ButtonHelper("audio4");
+
+    @FXML
+    Text timerCounter;
 
     @FXML
     VBox bgd;
 
     @FXML
-    TextField inputFilenameW, inputFilenameA, inputFilenameS, inputFilenameD;
-
-    boolean oneTime = true;
-
+    TextField inputFilenameW, inputFilenameA, inputFilenameS, inputFilenameD, inputRecTime;
+    GriseldaMediaPlayer mediaPlayerW = new GriseldaMediaPlayer(), mediaPlayerA = new GriseldaMediaPlayer(), mediaPlayerS = new GriseldaMediaPlayer(), mediaPlayerD = new GriseldaMediaPlayer();
     
-    GriseldaMediaPlayer mediaPlayer = new GriseldaMediaPlayer();
-    
-    //ADD DISPLAY THE FILE THAT IS OPENED ON THE BUTTON NAME
-    //ADD ALLOW SELECTION OF TIME
-    //ADD TIMER COUNTDOWN
-    //FIGURE OUT AUDIO OUTPUT
-    //RESEARCH STATE MACHINES AND THREADS TO FIND OUT HOW TO PLAY ONE AUDIO AT TIME
-
-    // Move the code that was here, to play the file, inside the if statement so the
-    // application doesn't crash if the user doesn't select a file to play.
-
     FileChooser fileChooser = new FileChooser();
 
     public PrimaryController() {
         fileChooser.setTitle("Open Resource File");
         fileChooser.getExtensionFilters().addAll(
-                new ExtensionFilter("Audio Files", "*.wav", "*.mp3", "*.aac"),
-                new ExtensionFilter("All Files", "*.*"));
+                new ExtensionFilter("Audio Files", "*.wav"));
     }
     
     @FXML
     public void backgroundKeyDetected(){
         bgd.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.W) {
-                System.out.println(audio1.getId());
-                File gottenFile = new File("C:/Users/risha/Desktop/Other/Programming/GRISELDA/griselda/saves/" + audio1.getText() + ".wav");
-
-                if(!gottenFile.exists()){
-                    System.out.println("FILE DNI FOR W KEY! CREATE FILE FIRST L");
-                    return;
-                }
-
-                MediaPlayer mediaPlayer = new MediaPlayer(new Media(gottenFile.toURI().toString()));
-                mediaPlayer.play();
+                playAudioW();
             } else if (event.getCode() == KeyCode.A) {
-                System.out.println(audio2.getId());
-                File gottenFile = new File("C:/Users/risha/Desktop/Other/Programming/GRISELDA/griselda/saves/" + audio2.getText() + ".wav");
-
-                if(!gottenFile.exists()){
-                    System.out.println("FILE DNI FOR A KEY! CREATE FILE FIRST L");
-                    return;
-                }
-
-                MediaPlayer mediaPlayer = new MediaPlayer(new Media(gottenFile.toURI().toString()));
-                mediaPlayer.play();
+                playAudioA();
             } else if (event.getCode() == KeyCode.S) {
-                System.out.println(audio3.getId());
-                File gottenFile = new File("C:/Users/risha/Desktop/Other/Programming/GRISELDA/griselda/saves/" + audio3.getText() + ".wav");
-
-                if(!gottenFile.exists()){
-                    System.out.println("FILE DNI FOR S KEY! CREATE FILE FIRST L");
-                    return;
-                }
-
-                MediaPlayer mediaPlayer = new MediaPlayer(new Media(gottenFile.toURI().toString()));
-                mediaPlayer.play();
+                playAudioS();
             } else if (event.getCode() == KeyCode.D) {
-                System.out.println(audio4.getId());
-                File gottenFile = new File("C:/Users/risha/Desktop/Other/Programming/GRISELDA/griselda/saves/" + audio4.getText() + ".wav");
-
-                if(!gottenFile.exists()){
-                    System.out.println("FILE DNI FOR D KEY! CREATE FILE FIRST L");
-                    return;
-                }
-
-                MediaPlayer mediaPlayer = new MediaPlayer(new Media(gottenFile.toURI().toString()));
-                mediaPlayer.play();
-            } else if (event.getCode() == KeyCode.M){
-                System.out.println(mediaPlayer.toString());
+                playAudioD();
+            } else if(event.getCode() == KeyCode.M){
+                System.out.println("(" + MouseInfo.getPointerInfo().getLocation().x + 
+              ", " + 
+              MouseInfo.getPointerInfo().getLocation().y + ")");
             }
         });
     }
+
     @FXML
-    private void printOutAudio1() throws IOException{
-
-        System.out.println(audio1.getId());
-        File gottenFile = new File("C:/Users/risha/Desktop/Other/Programming/GRISELDA/griselda/saves/" + audio1.getText() + ".wav");
-
-        if(!gottenFile.exists()){
-            System.out.println("FILE DNI FOR W KEY! CREATE FILE FIRST L");
-            return;
-        }
-        if(oneTime){
-            mediaPlayer.setMediaPlayer(new MediaPlayer(new Media(gottenFile.toURI().toString())));
-            mediaPlayer.play();
-        } else if(mediaPlayer.getStatus() == GriseldaMediaPlayer.PlayerStatus.PLAYING){
-            System.out.println("WAS PLAYING. PAUSING.");
-            mediaPlayer.stop();
-            mediaPlayer.setMediaPlayer(new MediaPlayer(new Media(gottenFile.toURI().toString())));
-            mediaPlayer.play();
-        } else {
-            mediaPlayer.setMediaPlayer(new MediaPlayer(new Media(gottenFile.toURI().toString())));
-            mediaPlayer.play();
-        }
-        oneTime = false;
+    private void playAudioWFXML() throws IOException{
+        playAudioW();
     }
 
     @FXML
-    private void printOutAudio2() throws IOException{
-        System.out.println(audio2.getId());
-        File gottenFile = new File("C:/Users/risha/Desktop/Other/Programming/GRISELDA/griselda/saves/" + audio2.getText() + ".wav");
-
-        if(!gottenFile.exists()){
-            System.out.println("FILE DNI FOR A KEY! CREATE FILE FIRST L");
-            return;
-        }
-
-        MediaPlayer mediaPlayer = new MediaPlayer(new Media(gottenFile.toURI().toString()));
-        mediaPlayer.play();
+    private void playAudioAFXML() throws IOException{
+        playAudioA();
+    }
+    @FXML
+    private void playAudioSFXML() throws IOException{
+        playAudioS();
     }
 
     @FXML
-    private void printOutAudio3() throws IOException{
-        System.out.println(audio3.getId());
-        File gottenFile = new File("C:/Users/risha/Desktop/Other/Programming/GRISELDA/griselda/saves/" + audio3.getText() + ".wav");
-
-        if(!gottenFile.exists()){
-            System.out.println("FILE DNI FOR D KEY! CREATE FILE FIRST L");
-            return;
-        }
-
-        MediaPlayer mediaPlayer = new MediaPlayer(new Media(gottenFile.toURI().toString()));
-        mediaPlayer.play();
-    }
-
-    @FXML
-    private void printOutAudio4() throws IOException{
-        System.out.println(audio4.getId());
-        File gottenFile = new File("C:/Users/risha/Desktop/Other/Programming/GRISELDA/griselda/saves/" + audio4.getText() + ".wav");
-
-        if(!gottenFile.exists()){
-            System.out.println("FILE DNI FOR Dx KEY! CREATE FILE FIRST L");
-            return;
-        }
-
-        MediaPlayer mediaPlayer = new MediaPlayer(new Media(gottenFile.toURI().toString()));
-        mediaPlayer.play();
-    }
-    @FXML
-    private void onEnterClickedW(){
-        onEnterClicked(1);
-        audio1.setText(inputFilenameW.getText());
-    }
-
-    @FXML
-    private void onEnterClickedA(){
-        onEnterClicked(2);
-        audio2.setText(inputFilenameA.getText());
-    }
-    @FXML
-    private void onEnterClickedS(){
-        onEnterClicked(3);
-        audio3.setText(inputFilenameS.getText());
-    }
-    @FXML
-    private void onEnterClickedD(){
-        onEnterClicked(4);
-        audio4.setText(inputFilenameD.getText());
+    private void playAudioDFXML() throws IOException{
+        playAudioD();
     }
 
     @FXML
@@ -208,14 +97,18 @@ public class PrimaryController {
                 inputFilename = inputFilenameW;
         }
 
+        try {
+            Long.parseLong(inputRecTime.getText()); 
+        } catch (NumberFormatException ex){
+            System.out.println("VALID TIME NEEDED");
+            return;
+        }
 
-        long recordTime = 5000;
+        long recordTime = Long.parseLong(inputRecTime.getText()) * 1000;
         File wavFile = new File("C:/Users/risha/Desktop/Other/Programming/GRISELDA/griselda/saves/" + inputFilename.getText() + ".wav");
 
         final SoundManipulator recorder = new SoundManipulator();
 
-        // creates a new thread that waits for a specified
-        // of time before stopping
         Thread stopper = new Thread(new Runnable() {
             public void run() {
                 try {
@@ -227,9 +120,167 @@ public class PrimaryController {
             }
         });
 
-        stopper.start();
+        TimeTracker tt = new TimeTracker();
+        
+        Thread t1 = new Thread(() -> {
+            stopper.start();
+            recorder.start(wavFile);
+        });
+        
+        Thread t2 = new Thread(() -> {
+            tt.startTime();
+            while(!recorder.getIsFinished()){
+                int x = ((int)recordTime / 1000) - (int)tt.time();
+                timerCounter.setText("" + x);
+            }
+        });
+        t1.start();
+        t2.start();
+    }
 
-        // start recording
-        recorder.start(wavFile);
+    @FXML
+    private void onFileChooserClickedW(){
+        File wavFile = fileChooser.showSaveDialog(fileChooserWBtn.getScene().getWindow());
+        String fileName = wavFile.getName().substring(0, wavFile.getName().length() - 4);
+
+        audio1.setText(fileName);
+        inputFilenameW.setText(fileName);
+    }
+    
+    @FXML
+    private void onFileChooserClickedA(){
+        File wavFile = fileChooser.showSaveDialog(fileChooserWBtn.getScene().getWindow());
+        String fileName = wavFile.getName().substring(0, wavFile.getName().length() - 4);
+
+        audio2.setText(fileName);
+        inputFilenameA.setText(fileName);
+    }
+
+    @FXML
+    private void onFileChooserClickedS(){
+        File wavFile = fileChooser.showSaveDialog(fileChooserWBtn.getScene().getWindow());
+        String fileName = wavFile.getName().substring(0, wavFile.getName().length() - 4);
+
+        audio3.setText(fileName);
+        inputFilenameS.setText(fileName);
+    }
+
+    @FXML
+    private void onFileChooserClickedD(){
+        File wavFile = fileChooser.showSaveDialog(fileChooserWBtn.getScene().getWindow());
+        String fileName = wavFile.getName().substring(0, wavFile.getName().length() - 5);
+
+        audio4.setText(fileName);
+        inputFilenameD.setText(fileName);
+    }
+
+    
+    @FXML
+    private void onEnterClickedW(){
+        onEnterClicked(1);
+        audio1.setText(inputFilenameW.getText());
+    }
+
+    @FXML
+    private void onEnterClickedA(){
+        onEnterClicked(2);
+        audio2.setText(inputFilenameA.getText());
+    }
+    @FXML
+    private void onEnterClickedS(){
+        onEnterClicked(3);
+        audio3.setText(inputFilenameS.getText());
+    }
+    @FXML
+    private void onEnterClickedD(){
+        onEnterClicked(4);
+        audio4.setText(inputFilenameD.getText());
+    }
+
+    private void playAudioW(){
+        File gottenFile = new File("C:/Users/risha/Desktop/Other/Programming/GRISELDA/griselda/saves/" + audio1.getText() + ".wav");
+
+        if(!gottenFile.exists()){
+            System.out.println("FILE DNI FOR W KEY! CREATE FILE FIRST");
+            return;
+        }
+
+        if(mediaPlayerW.getMediaPlayer() == null || mediaPlayerW.getStatus() == GriseldaMediaPlayer.PlayerStatus.PAUSED){
+            mediaPlayerW.setMediaPlayer(new MediaPlayer(new Media(gottenFile.toURI().toString())));
+            mediaPlayerW.play();
+        } else if(mediaPlayerW.getStatus() == GriseldaMediaPlayer.PlayerStatus.PLAYING){
+            System.out.println("REPLAYING...");
+            mediaPlayerW.stop();
+            mediaPlayerW.setMediaPlayer(new MediaPlayer(new Media(gottenFile.toURI().toString())));
+            mediaPlayerW.play();
+        } else {
+            mediaPlayerW.setMediaPlayer(new MediaPlayer(new Media(gottenFile.toURI().toString())));
+            mediaPlayerW.play();
+        }
+    }
+
+    private void playAudioA(){
+        File gottenFile = new File("C:/Users/risha/Desktop/Other/Programming/GRISELDA/griselda/saves/" + audio2.getText() + ".wav");
+
+        if(!gottenFile.exists()){
+            System.out.println("FILE DNI FOR A KEY! CREATE FILE FIRST");
+            return;
+        }
+
+        if(mediaPlayerA.getMediaPlayer() == null || mediaPlayerA.getStatus() == GriseldaMediaPlayer.PlayerStatus.PAUSED){
+            mediaPlayerA.setMediaPlayer(new MediaPlayer(new Media(gottenFile.toURI().toString())));
+            mediaPlayerA.play();
+        } else if(mediaPlayerA.getStatus() == GriseldaMediaPlayer.PlayerStatus.PLAYING){
+            System.out.println("REPLAYING...");
+            mediaPlayerA.stop();
+            mediaPlayerA.setMediaPlayer(new MediaPlayer(new Media(gottenFile.toURI().toString())));
+            mediaPlayerA.play();
+        } else {
+            mediaPlayerA.setMediaPlayer(new MediaPlayer(new Media(gottenFile.toURI().toString())));
+            mediaPlayerA.play();
+        }
+    }
+    private void playAudioS(){
+        File gottenFile = new File("C:/Users/risha/Desktop/Other/Programming/GRISELDA/griselda/saves/" + audio3.getText() + ".wav");
+
+        if(!gottenFile.exists()){
+            System.out.println("FILE DNI FOR D KEY! CREATE FILE FIRST");
+            return;
+        }
+
+        if(mediaPlayerS.getMediaPlayer() == null || mediaPlayerS.getStatus() == GriseldaMediaPlayer.PlayerStatus.PAUSED){
+            mediaPlayerS.setMediaPlayer(new MediaPlayer(new Media(gottenFile.toURI().toString())));
+            mediaPlayerS.play();
+        } else if(mediaPlayerW.getStatus() == GriseldaMediaPlayer.PlayerStatus.PLAYING){
+            System.out.println("REPLAYING...");
+            mediaPlayerS.stop();
+            mediaPlayerS.setMediaPlayer(new MediaPlayer(new Media(gottenFile.toURI().toString())));
+            mediaPlayerS.play();
+        } else {
+            mediaPlayerS.setMediaPlayer(new MediaPlayer(new Media(gottenFile.toURI().toString())));
+            mediaPlayerS.play();
+        }
+    }
+    
+    private void playAudioD(){
+        File gottenFile = new File("C:/Users/risha/Desktop/Other/Programming/GRISELDA/griselda/saves/" + audio4.getText() + ".wav");
+
+        if(!gottenFile.exists()){
+            System.out.println("FILE DNI FOR D KEY! CREATE FILE FIRST");
+            return;
+        }
+
+        if(mediaPlayerD.getMediaPlayer() == null || mediaPlayerD.getStatus() == GriseldaMediaPlayer.PlayerStatus.PAUSED){
+            mediaPlayerD.setMediaPlayer(new MediaPlayer(new Media(gottenFile.toURI().toString())));
+            mediaPlayerD.play();
+        } else if(mediaPlayerD.getStatus() == GriseldaMediaPlayer.PlayerStatus.PLAYING){
+            System.out.println("REPLAYING...");
+            mediaPlayerD.stop();
+            mediaPlayerD.setMediaPlayer(new MediaPlayer(new Media(gottenFile.toURI().toString())));
+            mediaPlayerD.play();
+        } else {
+            mediaPlayerD.setMediaPlayer(new MediaPlayer(new Media(gottenFile.toURI().toString())));
+            mediaPlayerD.play();
+        }
     }
 }
