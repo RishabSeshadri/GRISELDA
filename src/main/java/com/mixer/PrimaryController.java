@@ -96,7 +96,7 @@ public class PrimaryController {
             toggleRepeatA.setSelected(false);
             System.out.println("No selected audio to repeat for A!");
         } else {
-            if(toggleRepeatA.isSelected()){
+            if(!toggleRepeatA.isSelected()){
                 mediaPlayerA.repeatOff();
                 toggleRepeatA.setText("A: Not repeating");
             } else {
@@ -114,7 +114,7 @@ public class PrimaryController {
             toggleRepeatS.setSelected(false);
             System.out.println("No selected audio to repeat for S!");
         } else {
-            if(toggleRepeatS.isSelected()){
+            if(!toggleRepeatS.isSelected()){
                 mediaPlayerS.repeatOff();
                 toggleRepeatS.setText("S: Not repeating");
             } else {
@@ -132,7 +132,7 @@ public class PrimaryController {
             toggleRepeatD.setSelected(false);
             System.out.println("No selected audio to repeat for D!");
         } else {
-            if(toggleRepeatD.isSelected()){
+            if(!toggleRepeatD.isSelected()){
                 mediaPlayerD.repeatOff();
                 toggleRepeatD.setText("D: Not repeating");
             } else {
