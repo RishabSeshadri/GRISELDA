@@ -10,15 +10,28 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 
 import java.awt.MouseInfo;
+
 public class PrimaryController {
+
+    /**
+     * TO DO: 
+     * MAKE LESS UGLY CODE
+     * MAKE LESS UGLY APP
+     * ADD CLIPPING/TRIMMING FUNCTIONALITY
+     * 
+     */
+
 
     @FXML
     Button audio1, audio2, audio3, audio4, timerBtn, fileChooserWBtn, fileChooserABtn, fileChooserSBtn, fileChooserDBtn;
-    public static ButtonHelper audio1H = new ButtonHelper("audio1"), audio2H = new ButtonHelper("audio2"), audio3H = new ButtonHelper("audio3"), audio4H = new ButtonHelper("audio4");
+
+    @FXML
+    ToggleButton toggleRepeatW, toggleRepeatA, toggleRepeatS, toggleRepeatD;
 
     @FXML
     Text timerCounter;
@@ -28,7 +41,8 @@ public class PrimaryController {
 
     @FXML
     TextField inputFilenameW, inputFilenameA, inputFilenameS, inputFilenameD, inputRecTime;
-    GriseldaMediaPlayer mediaPlayerW = new GriseldaMediaPlayer(), mediaPlayerA = new GriseldaMediaPlayer(), mediaPlayerS = new GriseldaMediaPlayer(), mediaPlayerD = new GriseldaMediaPlayer();
+    GriseldaMediaPlayer mediaPlayerW = new GriseldaMediaPlayer(), mediaPlayerA = new GriseldaMediaPlayer(),
+    mediaPlayerS = new GriseldaMediaPlayer(), mediaPlayerD = new GriseldaMediaPlayer();
     
     FileChooser fileChooser = new FileChooser();
 
@@ -57,6 +71,77 @@ public class PrimaryController {
         });
     }
 
+    @FXML
+    private void setRepeatingWFXML(){
+        if(mediaPlayerW.getMediaPlayer() == null){
+            toggleRepeatW.setText("W: Not repeating");
+            toggleRepeatW.setSelected(false);
+            System.out.println("No selected audio to repeat for W!");
+        } else {
+            if(!toggleRepeatW.isSelected()){
+                mediaPlayerW.repeatOff();
+                toggleRepeatW.setText("W: Not repeating");
+            } else {
+                mediaPlayerW.repeatOn();
+                toggleRepeatW.setText("W: Repeating");
+            }
+        }
+    }
+        
+
+    @FXML
+    private void setRepeatingAFXML(){
+        if(mediaPlayerA.getMediaPlayer() == null){
+            toggleRepeatA.setText("A: Not repeating");
+            toggleRepeatA.setSelected(false);
+            System.out.println("No selected audio to repeat for A!");
+        } else {
+            if(toggleRepeatA.isSelected()){
+                mediaPlayerA.repeatOff();
+                toggleRepeatA.setText("A: Not repeating");
+            } else {
+                mediaPlayerA.repeatOn();
+                toggleRepeatA.setText("A: Repeating");
+            }
+        }
+        
+    }
+
+    @FXML
+    private void setRepeatingSFXML(){
+        if(mediaPlayerS.getMediaPlayer() == null){
+            toggleRepeatS.setText("S: Not repeating");
+            toggleRepeatS.setSelected(false);
+            System.out.println("No selected audio to repeat for S!");
+        } else {
+            if(toggleRepeatS.isSelected()){
+                mediaPlayerS.repeatOff();
+                toggleRepeatS.setText("S: Not repeating");
+            } else {
+                mediaPlayerS.repeatOn();
+                toggleRepeatS.setText("S: Repeating");
+                
+            }
+        }
+    }
+
+    @FXML
+    private void setRepeatingDFXML(){
+        if(mediaPlayerD.getMediaPlayer() == null){
+            toggleRepeatD.setText("D: Not repeating");
+            toggleRepeatD.setSelected(false);
+            System.out.println("No selected audio to repeat for D!");
+        } else {
+            if(toggleRepeatD.isSelected()){
+                mediaPlayerD.repeatOff();
+                toggleRepeatD.setText("D: Not repeating");
+            } else {
+                mediaPlayerD.repeatOn();
+                toggleRepeatD.setText("D: Repeating");
+            }
+        }
+    }
+ 
     @FXML
     private void playAudioWFXML() throws IOException{
         playAudioW();

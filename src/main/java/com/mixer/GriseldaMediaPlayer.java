@@ -5,7 +5,7 @@ import javafx.scene.media.MediaPlayer;
 public class GriseldaMediaPlayer{
 
     public enum PlayerStatus{
-        PLAYING, PAUSED
+        PLAYING, PAUSED, REPEATING
     }   
     
     MediaPlayer mPlayer;
@@ -36,8 +36,11 @@ public class GriseldaMediaPlayer{
         mPlayer = player;
         mPlayer.setOnEndOfMedia(() -> {
             status = PlayerStatus.PAUSED;
-            System.out.println(toString());
+            toString();
         });
+        if(status == PlayerStatus.REPEATING){
+            repeatOn();
+        }
     }
 
     public MediaPlayer getMediaPlayer(){
@@ -45,12 +48,8 @@ public class GriseldaMediaPlayer{
     }
 
     public void play(){
-        if(status == PlayerStatus.PAUSED){
-            mPlayer.play();
-            status = PlayerStatus.PLAYING;
-        } else {
-            stop();
-        }
+        mPlayer.play();
+        status = PlayerStatus.PLAYING;
     }
 
     public void stop(){
@@ -63,9 +62,20 @@ public class GriseldaMediaPlayer{
         status = PlayerStatus.PAUSED;
     }
 
+    public void repeatOn(){
+        mPlayer.setCycleCount(-1);
+        status = PlayerStatus.REPEATING;
+    }
+
+    public void repeatOff(){
+        mPlayer.setCycleCount(1);
+        status = PlayerStatus.PAUSED;
+    }
+
     public void onEndOfMedia(){
         status = PlayerStatus.PAUSED;
         System.out.println(toString());
+        
     }
 
     public String toString(){
