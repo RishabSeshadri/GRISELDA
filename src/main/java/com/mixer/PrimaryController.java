@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javafx.scene.media.*;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -74,16 +75,16 @@ public class PrimaryController {
     @FXML
     private void setRepeatingWFXML(){
         if(mediaPlayerW.getMediaPlayer() == null){
-            toggleRepeatW.setText("W: Not repeating");
+            toggleRepeatW.setStyle("-fx-background-color: #DB5448; -fx-background-radius: 15px; -fx-text-fill: #ffffff");
             toggleRepeatW.setSelected(false);
             System.out.println("No selected audio to repeat for W!");
         } else {
             if(!toggleRepeatW.isSelected()){
+                toggleRepeatW.setStyle("-fx-background-color: #DB5448; -fx-background-radius: 15px; -fx-text-fill: #ffffff");
                 mediaPlayerW.repeatOff();
-                toggleRepeatW.setText("W: Not repeating");
             } else {
+                toggleRepeatW.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 15px; -fx-text-fill: #A70644");
                 mediaPlayerW.repeatOn();
-                toggleRepeatW.setText("W: Repeating");
             }
         }
     }
@@ -92,16 +93,16 @@ public class PrimaryController {
     @FXML
     private void setRepeatingAFXML(){
         if(mediaPlayerA.getMediaPlayer() == null){
-            toggleRepeatA.setText("A: Not repeating");
+            toggleRepeatA.setStyle("-fx-background-color: #DB5448; -fx-background-radius: 15px; -fx-text-fill: #ffffff");
             toggleRepeatA.setSelected(false);
             System.out.println("No selected audio to repeat for A!");
         } else {
             if(!toggleRepeatA.isSelected()){
+                toggleRepeatA.setStyle("-fx-background-color: #DB5448; -fx-background-radius: 15px; -fx-text-fill: #ffffff");
                 mediaPlayerA.repeatOff();
-                toggleRepeatA.setText("A: Not repeating");
             } else {
+                toggleRepeatA.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 15px; -fx-text-fill: #A70644");
                 mediaPlayerA.repeatOn();
-                toggleRepeatA.setText("A: Repeating");
             }
         }
         
@@ -110,16 +111,16 @@ public class PrimaryController {
     @FXML
     private void setRepeatingSFXML(){
         if(mediaPlayerS.getMediaPlayer() == null){
-            toggleRepeatS.setText("S: Not repeating");
+            toggleRepeatS.setStyle("-fx-background-color: #DB5448; -fx-background-radius: 15px; -fx-text-fill: #ffffff");
             toggleRepeatS.setSelected(false);
             System.out.println("No selected audio to repeat for S!");
         } else {
             if(!toggleRepeatS.isSelected()){
+                toggleRepeatS.setStyle("-fx-background-color: #DB5448; -fx-background-radius: 15px; -fx-text-fill: #ffffff");
                 mediaPlayerS.repeatOff();
-                toggleRepeatS.setText("S: Not repeating");
             } else {
+                toggleRepeatS.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 15px; -fx-text-fill: #A70644");
                 mediaPlayerS.repeatOn();
-                toggleRepeatS.setText("S: Repeating");
                 
             }
         }
@@ -128,16 +129,16 @@ public class PrimaryController {
     @FXML
     private void setRepeatingDFXML(){
         if(mediaPlayerD.getMediaPlayer() == null){
-            toggleRepeatD.setText("D: Not repeating");
+            toggleRepeatD.setStyle("-fx-background-color: #DB5448; -fx-background-radius: 15px; -fx-text-fill: #ffffff");
             toggleRepeatD.setSelected(false);
             System.out.println("No selected audio to repeat for D!");
         } else {
             if(!toggleRepeatD.isSelected()){
+                toggleRepeatD.setStyle("-fx-background-color: #DB5448; -fx-background-radius: 15px; -fx-text-fill: #ffffff");
                 mediaPlayerD.repeatOff();
-                toggleRepeatD.setText("D: Not repeating");
             } else {
+                toggleRepeatD.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 15px; -fx-text-fill: #A70644");
                 mediaPlayerD.repeatOn();
-                toggleRepeatD.setText("D: Repeating");
             }
         }
     }

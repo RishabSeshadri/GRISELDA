@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -14,9 +15,10 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("primary"), 1504, 925);
+        stage.setTitle("GRISELDA Mixer");
         stage.setScene(scene);
-        stage.setMinWidth(1450);
-        stage.setMinHeight(600);
+        stage.setMinWidth(1500);
+        stage.setMinHeight(750);
         stage.show();
     }
 
@@ -32,5 +34,4 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
-
 }
