@@ -5,3 +5,5 @@
 
 Simple soundboard/mixer!
 Launch the GRISELDA Mixer jar :)
+
+by Rishab Seshadri
