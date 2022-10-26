@@ -1,4 +1,4 @@
-![griselda](https://user-images.githubusercontent.com/43252479/197929113-b3b2e62f-bcb0-4a82-8860-525d27420d4b.png)
+![griselda](https://user-images.githubusercontent.com/43252479/197930503-43266483-a8e9-4860-b63f-2cd2a0a51b7f.png)
 
 
 # GRISELDA Mix-board
