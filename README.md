@@ -6,4 +6,7 @@
 Simple mix-board!
 Launch the GRISELDA Mixer jar :)
 
+
+Coded completely in Java using the JavaFX library with SceneBuilder and CSS styling. Still a work in progress!
+
 by Rishab Seshadri
